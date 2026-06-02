@@ -153,7 +153,36 @@ Understanding the Linux file system hierarchy is critical for efficient debuggin
 
 ### Introduction to Command Line (CLI Part 1)
 
-- [ ] Watched video
+- [x] Watched video
+
+**1. Graphical vs. Command-Line Interfaces**
+
+- **Graphical User Interface (GUI):** A visual environment that allows users to interact with the operating system through icons, menus, and windows. It is the standard interface for personal computing.
+- **Command-Line Interface (CLI):** A text-based interface used to interact with the operating system by typing specific commands.
+- **Key Differences:**
+  - **Personal Computers:** Usually feature both **GUI** and **CLI**.
+  - **Servers:** Typically operate using only a **CLI** to maximize performance and security.
+
+**2. Anatomy of the Terminal**
+
+The terminal is the application used to interact with the **CLI**. When you open a terminal window, you are presented with a command prompt that provides essential context about your session.
+
+**The Command Prompt Breakdown**
+
+A standard terminal prompt follows this structure: `user@hostname:path$`
+
+- **User:** The name of the currently logged-in user (e.g., stefano).
+- **Hostname:** The unique name of the computer or server you are currently accessing. This is critical in server environments to identify which machine is executing commands.
+- **Path (Tilde `~`):** A shortcut representing the user's home directory.
+- **Privilege Indicator:**
+  - **Dollar Sign (`$`):** Indicates you are logged in as a regular user.
+  - **Pound Sign (`#`):** Indicates you are logged in as a root/superuser, possessing administrative privileges.
+
+**3. Functionality**
+
+The terminal serves as the primary interface for instructing the operating system. Instead of performing actions manually through a visual interface (e.g., clicking to create a folder), you execute specific commands that the computer processes directly.
+
+---
 
 ### Basic Linux Commands (CLI Part 2)
 
