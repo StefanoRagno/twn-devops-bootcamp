@@ -186,13 +186,64 @@ The terminal serves as the primary interface for instructing the operating syste
 
 ### Basic Linux Commands (CLI Part 2)
 
-- [ ] Watched video
-- [ ] Demo executed
+- [x] Watched video
+- [x] Demo executed
 
 **Useful Links:**
 
-* **Cheat Sheet:** https://cheatography.com/davechild/cheat-sheets/linux-command-line/
-* **Cheat Sheet:** https://www.guru99.com/linux-commands-cheat-sheet.html
+- **Link:** Cheat Sheet: https://cheatography.com/davechild/cheat-sheets/linux-command-line/
+- **Link:** Cheat Sheet: https://www.guru99.com/linux-commands-cheat-sheet.html
+
+**Linux Command Glossary**
+
+**Basic Navigation & File Management**
+
+- **`pwd`:** Print Working Directory; displays your current directory/location.
+- **`ls`:** List files and directories in the current folder.
+- **`ls -R` (list recursive):** List recursively; displays all files and folders, including those within subdirectories.
+- **`la -a`:** List all; shows all files, including hidden ones (files starting with a dot).
+- **`cd [directory]`:** Change directory; navigates to the specified folder.
+- **`cd..`:** Moves one directory level up.
+- **`cd [absolute path]`:** Moves to any location by providing the full path starting from root (`/`).
+- **`mkdir`:** Make directory; creates a new folder; `mkdir [name folder]`.
+- **`touch [filename]`:** Creates a blank file. (Note: `touch` primarily updates a file's timestamp, but creates the file if it does not exist).
+- **`rm [fileName]`:** Removes (deletes) a file.
+- **`rm -r`:** Removes a directory and its contents recursively. It starts at the deepest level and deletes files before removing the directory itself.
+
+**Utility & System Commands**
+
+- **`clear`:** Clears the terminal screen.
+- **`mv [source] [destination]`:** Moves or renames a file or directory. If the destination is a new name in the same folder, it renames the file.
+- **`cp [file] [destination]`:** Copies files.
+- **`cp -r [folder] [destination]`:** Copies a directory and all of its contents recursively.
+- **`history`:** Lists the commands previously typed in the current terminal session.
+- **`cat [filename]`:** Concatenate; displays the entire content of a file.
+- **`sudo [command]`:** Allows a regular user to execute commands with root (superuser) privileges.
+- **`su [username]`:** Switch User; allows you to log in as a different user within the current terminal session.
+- **`less [filename]`:** Used for reading and searching through large files; allows scrolling.
+- **`tail [filename]`:** Displays the last part of a file. Use `tail -f` to monitor logs in real-time.
+
+**System Information**
+
+- **`uname -a`:** Displays system and kernel information.
+- **`cat /etc/os-release`:** Displays operating system release information.
+- **`lscpu`:** Displays CPU architecture information.
+- **`lsmem`:** Displays system memory information.
+- **`ls /sbin`:** Lists essential system administration binaries.
+
+**Shortcuts**
+
+- **`Ctrl + r`:** Search your command history.
+- **`Ctrl + c`:** Interrupts (kills) the currently running process.
+
+**Examples**
+
+- **Relative Navigation:** `cd usr/local/bin` Changes directory from your current location.
+- **Backtracking:** `cd ../..` or `cd /usr` Navigates to parent directories.
+- **Home Shortcut:** `cd ~` Navigates directly to the user's home directory.
+- **Non-intrusive Listing:** `ls /etc/network` Lists contents of a folder without changing your current directory.
+
+---
 
 ### Package Manager - Installing Software on Linux
 
