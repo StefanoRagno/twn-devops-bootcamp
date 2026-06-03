@@ -247,12 +247,80 @@ The terminal serves as the primary interface for instructing the operating syste
 
 ### Package Manager - Installing Software on Linux
 
-- [ ] Watched video
-- [ ] Demo executed
+- [x] Watched video
+- [x] Demo executed
 
 **Useful Links:**
 
-* **Snap Package Manager:** https://snapcraft.io/
+- **Link:** Snap Package Manager: https://snapcraft.io/
+
+**1. Introduction to Package Managers**
+
+A software package is a compressed archive containing all the files an application needs to run. In Linux, application files are distributed across multiple system directories (unlike Windows, where everything usually resides in a single folder).
+
+**Why use a Package Manager?**
+
+- **Dependency Resolution:** Most applications depend on other software to run. The package manager automatically fetches and installs all required dependencies.
+- **Centralized File Management:** It tracks exactly where every file is placed (binaries, shared libraries, etc.), allowing for clean and complete Uninstall.
+- **Seamless Updates:** It allows you to upgrade software via command-line without manually uninstalling older versions.
+
+**2. Managing Software with APT (Advanced Package Tool)**
+
+**APT** is the default package manager for Debian-based distributions like Ubuntu. It uses the command-line interface to interact with the system's software repositories.
+
+Note: Most installation and removal commands require elevated privileges using `sudo`.
+
+**Core APT Commands**
+
+- **`update`:** Refreshes the local cache of available packages and their versions from repositories. (Always run this first) `sudo apt update`
+- **`search`:** Searches for a given package name or description. `apt search <package_name>`
+- **`install`:** Installs one or more packages and their dependencies. `sudo apt install <package_name>`
+- **`remove`:** Removes an installed package (but leaves configuration files). `sudo apt remove <package_name>`
+- **`list`:** Lists packages based on package names. `apt list`
+- **`show`:** Shows detailed information about a specific package. `apt show <package_name>`
+- **`upgrade`:** Upgrades the system by installing newer versions of currently installed packages. `sudo apt upgrade`
+- **`autoremove`:** Removes unused packages that were automatically installed as dependencies but are no longer needed. `sudo apt autoremove`
+
+**APT vs. APT-GET**
+
+While `apt-get` is a legacy package manager still available, always prefer `apt` when available.
+Why? `apt` is the modern, user-friendly interface. It provides cleaner output, progress bars during installations, and bundles functionality like search that `apt-get` lacked natively.
+
+**3. Repositories**
+
+Repositories are online "warehouses" containing thousands of software packages and their dependencies. The package manager fetches software directly from these sources.
+
+- **Configuration:** Official repository URLs are stored in `/etc/apt/sources.list`.
+- **Security Best Practice:** Before installing anything, always run `sudo apt update` to synchronize your system with the latest repository state.
+
+**Adding Repositories (PPA)**
+
+Personal Package Archives (PPAs) allow developers to distribute cutting-edge software outside of official repositories. Adding a PPA updates your `sources.list` file.
+- **Warning:** PPAs are personal and unverified by the official Linux distribution. Ensure the source is trustworthy before adding it.
+
+**4. Alternative Installation Methods**
+
+When software is not in the official repositories or requires the absolute latest version, you can use these alternatives:
+
+**Snap Package Manager**
+
+Snap is a modern, distribution-agnostic package manager where packages are self-contained (bundling all necessary dependencies into a single compressed file).
+- **Pros:** Works across different Linux distributions and updates automatically in the background.
+- **Cons:** Consumes significantly more storage space because dependencies are not shared between applications. (e.g., if 5 apps need the same dependency, Snap downloads it 5 times).
+- **Rule of Thumb:** Always default to **APT**. Use Snap only when a package is unavailable via **APT**.
+
+**Ubuntu Software Center**
+
+A graphical user interface (**GUI**) alternative to the **CLI**. It simplifies software discovery and installation for desktop users. Under the hood, many applications installed via this center are actually pulled from the Snap store.
+
+**5. Linux Distribution Categories**
+
+Different Linux distributions use different package managers based on their core architecture. However, the core concepts (fetching from repositories, resolving dependencies) remain identical.
+
+- **Debian-based:** Ubuntu, Debian, Linux Mint `apt` / `apt-get`
+- **Red Hat-based:** RHEL, CentOS, Fedora `yum` / `dnf`
+
+---
 
 ### Vi & Vim Text Editor
 
@@ -312,4 +380,3 @@ The terminal serves as the primary interface for instructing the operating syste
   - [ ] Execute Bash Script on the remote server
   - [ ] Don’t forget to delete Droplet when you are done!
 
-```
