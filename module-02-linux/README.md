@@ -207,6 +207,7 @@ The terminal serves as the primary interface for instructing the operating syste
 - **`cd [absolute path]`:** Moves to any location by providing the full path starting from root (`/`).
 - **`mkdir`:** Make directory; creates a new folder; `mkdir [name folder]`.
 - **`touch [filename]`:** Creates a blank file. (Note: `touch` primarily updates a file's timestamp, but creates the file if it does not exist).
+- **`echo [text]`:** Prints the specified text to the terminal. It can be combined with `>` or `>>` to create or write into files.
 - **`rm [fileName]`:** Removes (deletes) a file.
 - **`rm -r`:** Removes a directory and its contents recursively. It starts at the deepest level and deletes files before removing the directory itself.
 
@@ -324,12 +325,67 @@ Different Linux distributions use different package managers based on their core
 
 ### Vi & Vim Text Editor
 
-- [ ] Watched video
-- [ ] Demo executed
+- [x] Watched video
+- [x] Demo executed
 
 **Useful Links:**
 
-* **Cheat Sheet:** https://vim.rtorr.com/
+- **Link:** Cheat Sheet:** https://vim.rtorr.com/
+
+**Vim Editor: Quick Reference Guide**
+
+**Overview**
+
+`vim` (and its predecessor `vi`) is a built-in command-line text editor available natively on most Linux distributions. It is primarily utilized for quick file edits, environment configuration (e.g., Kubernetes, Git commit messages), and managing remote servers devoid of a **graphical user interface**.
+
+**Opening and Creating Files**
+
+To open an existing file of any extension or instantiate a new one, execute:
+`vim <filename>`
+
+**Operating Modes**
+
+Vim functions via two primary modes. Frequent switching between these modes is required during standard operation.
+
+- **Command Mode (Default):** The initialization mode. Used exclusively for file navigation, string searching, text deletion, and executing file-level commands (save/quit). Text input is disabled in this mode.
+- **Insert Mode (Edit Mode):** Used exclusively for typing characters and modifying the text contents of the file.
+
+**Essential Commands Reference**
+
+> [!NOTE]
+> All commands listed below must be executed from **Command Mode**. If you are currently in Insert Mode, press `Esc` first.
+
+**Mode Switching**
+
+- **`i`:** Switches to Insert Mode at the current cursor position.
+- **`A`:** Jumps directly to the end of the current line and immediately switches to Insert Mode.
+- **`Esc`:** Exits Insert Mode and returns to Command Mode.
+
+**File Operations (Saving & Quitting)**
+
+- **`:wq`:** Writes (saves) all current changes and quits the editor.
+- **`:q!`:** Force quits the editor and discards all unsaved changes.
+
+**Text Manipulation**
+
+- **`dd`:** Deletes the entire current line.
+- **`d<number>d`:** Deletes a specified batch of lines simultaneously (e.g., `d10d` deletes 10 lines starting from the cursor).
+- **`u`:** Undoes the most recent change. Can be pressed sequentially to undo multiple historical changes.
+
+**Navigation**
+
+- **`0`:** Jumps the cursor to the absolute beginning of the current line.
+- **`$`:** Jumps the cursor to the absolute end of the current line.
+- **`<number>G`:** Jumps directly to a specific line number within the file (e.g., `12G` routes the cursor to line 12).
+
+**Search and Replace**
+
+- **`/<search_string>`:** Searches the entire file forward for the specified string (e.g., `/nginx`).
+- **`n`:** Jumps to the next occurrence of the active search match.
+- **`N`:** Jumps to the previous occurrence of the active search match.
+- **`:%s/<original_string>/<new_string>/g`:** Executes a global find-and-replace operation across the entire file. Replaces all instances of the original string with the new string (e.g., `:%s/nginx/web-app/g`).
+
+---
 
 ### Users & Permissions - Part 1
 
