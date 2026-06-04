@@ -151,7 +151,7 @@ Understanding the Linux file system hierarchy is critical for efficient debuggin
 
 ---
 
-### Introduction to Command Line (CLI Part 1)
+### Introduction to Command Line Interface (CLI Part 1)
 
 - [x] Watched video
 
@@ -221,6 +221,7 @@ The terminal serves as the primary interface for instructing the operating syste
 - **`cat [filename]`:** Concatenate; displays the entire content of a file.
 - **`sudo [command]`:** Allows a regular user to execute commands with root (superuser) privileges.
 - **`su [username]`:** Switch User; allows you to log in as a different user within the current terminal session.
+- **`exit`:** Exits the current shell; logs out of the current user session or closes the terminal.
 - **`less [filename]`:** Used for reading and searching through large files; allows scrolling.
 - **`tail [filename]`:** Displays the last part of a file. Use `tail -f` to monitor logs in real-time.
 
@@ -387,12 +388,10 @@ Vim functions via two primary modes. Frequent switching between these modes is r
 
 ---
 
-### Users & Permissions - Part 2
+### Users & Permissions - Part 1
 
 - [x] Watched video
 - [x] Demo executed
-
-Here is the restructured and polished version of your technical reference, implementing the structural improvements and removing the redundancies.
 
 **Linux User and Group Management: Technical Reference**
 
@@ -469,8 +468,79 @@ When managing users and groups, Linux distributions typically offer two variants
 
 ### Users & Permissions - Part 2
 
-- [ ] Watched video
-- [ ] Demo executed
+- [x] Watched video
+- [x] Demo executed
+
+**LINUX FILE PERMISSIONS AND OWNERSHIP: TECHNICAL REFERENCE**
+
+**1. CORE CONCEPTS: OWNERSHIP AND PERMISSIONS**
+
+In Linux, every file and directory is governed by three levels of ownership and three types of access permissions.
+
+**OWNERSHIP LEVELS:**
+
+- **User (u):** The specific user account that owns the file (typically the creator).
+- **Group (g):** The primary group tied to the file.
+- **Other (o):** All other authenticated users on the system not covered by the User or Group.
+- **All (a):** A selector that targets User, Group, and Other simultaneously.
+
+**PERMISSION TYPES:**
+
+- **Read (r):** Grants the ability to view file contents or list directory contents.
+- **Write (w):** Grants the ability to modify file contents or alter directory structures.
+- **Execute (x):** Grants the ability to run a script/binary or traverse into a directory.
+
+**2. UNDERSTANDING THE PERMISSION STRING**
+
+When listing files, the **OS** outputs a 10-character string (e.g., `-rwxr-xr--`) detailing the exact access matrix.
+
+- **Character 1:** File type ("-" indicates a regular file, "d" indicates a directory, "c" indicates a character device file, and "l" indicates a symbolic link).
+- **Characters 2-4:** User permissions block.
+- **Characters 5-7:** Group permissions block.
+- **Characters 8-10:** Other permissions block.
+
+Note: A dash (`-`) inside a permission block means that specific permission is revoked or unassigned.
+
+**3. COMMAND REFERENCE**
+
+**VIEWING PERMISSIONS**
+
+- **`ls -l`:** Displays files and directories in long format, revealing their file type, permissions, user owner, and group owner.
+- **`ls -la`:** Displays the same detailed long format information as the previous command, but includes hidden files and directories.
+
+**MODIFYING OWNERSHIP**
+
+- **`chown username filename`:** Changes the user owner of the specified file to the designated username. Requires superuser privileges.
+- **`chown username:groupname filename`:** Changes both the user owner and the group owner of the specified file simultaneously.
+- **`chgrp groupname filename`:** Changes only the group owner of the specified file without affecting the user owner.
+
+**MODIFYING PERMISSIONS (chmod)**
+
+**Method A: Symbolic Modification (Add/Remove)**
+
+Uses the plus sign (`+`) to append a permission or the minus sign (`-`) to revoke it.
+
+- **`chmod -x filename`:** Removes the execute permission from all owners (User, Group, and Other).
+- **`chmod g-w filename`:** Removes the write permission specifically from the Group owner.
+- **`chmod g+x filename`:** Adds the execute permission specifically to the Group owner.
+- **`chmod u+x filename`:** Adds the execute permission specifically to the User owner.
+
+**Method B: Symbolic Assignment (Exact Match)**
+
+Uses the equals sign (`=`) to exactly define the permission block, strictly overriding any previous states.
+
+- **`chmod g=rwx filename`:** Sets the Group permissions exactly to read, write, and execute, dropping any other permission configuration the group previously held.
+
+**Method C: Numeric (Absolute) Assignment**
+
+Uses a three-digit numeric value to set permissions for User, Group, and Other simultaneously. Each digit is calculated by adding the specific values of the desired permissions: **Read is 4**, **Write is 2**, and **Execute is 1**.
+
+This creates a sum from 0 to 7 representing every possible combination: **0** (No Permission), **1** (Execute), **2** (Write), **3** (Write + Execute), **4** (Read), **5** (Read + Execute), **6** (Read + Write), and **7** (Read + Write + Execute).
+
+- **`chmod 777 filename`:** Grants full read, write, and execute permissions to the User, Group, and Other (everyone on the system).
+- **`chmod 740 filename`:** Grants read, write, and execute to the User (`7`), read-only to the Group (`4`), and no permissions to Other (`0`).
+
+---
 
 ### Basic Linux Commands - Pipes & Redirects (CLI Part 3)
 
