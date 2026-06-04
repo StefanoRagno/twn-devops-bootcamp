@@ -387,10 +387,85 @@ Vim functions via two primary modes. Frequent switching between these modes is r
 
 ---
 
-### Users & Permissions - Part 1
+### Users & Permissions - Part 2
 
-- [ ] Watched video
-- [ ] Demo executed
+- [x] Watched video
+- [x] Demo executed
+
+Here is the restructured and polished version of your technical reference, implementing the structural improvements and removing the redundancies.
+
+**Linux User and Group Management: Technical Reference**
+
+**1. System User Categories**
+
+Linux environments operate with three distinct user classifications to enforce security and resource isolation:
+
+- **Root User (Superuser):** Possesses unrestricted, system-wide execution permissions (**UID** `0`). Restricted strictly to core administrative tasks.
+- **Standard/Regular Users:** Interactive accounts designated for human operators. Each user is provisioned with an isolated `/home` directory.
+- **Service Users:** Non-interactive, dedicated accounts automatically created for specific system services or applications (e.g., Apache, MySQL). This is a critical security standard to ensure process isolation and prevent applications from executing with `root` privileges.
+
+**2. Core Configuration Files**
+
+System identity, access logic, and credentials are maintained in the following plain-text files:
+
+- **`/etc/passwd`:** Contains user account configurations (Username, encrypted password placeholder, **UID**, Primary **GID**, Home Directory path, Default Shell).
+- **`/etc/group`:** Contains system group configurations and member allocations.
+- **`/etc/shadow`:** Securely stores the actual encrypted user passwords and password aging/expiration data.
+
+**3. Understanding `/etc/passwd` Structure**
+
+Every user registered on the system corresponds to a single line in the `/etc/passwd` file, structured by colon-separated (`:`) fields:
+
+`USERNAME:PASSWORD:UID:GID:GECOS:HOMEDIR:SHELL`
+
+- **USERNAME:** The login name of the account.
+- **PASSWORD:** Always represented by an `x`. This indicates the actual encrypted password is securely stored in `/etc/shadow`.
+- **UID (User ID):** The unique numeric identifier for the user.
+- **GID (Group ID):** The primary numeric identifier of the group the user belongs to.
+- **GECOS:** A comment field typically used to store the user's full real name or general contact information.
+- **HOMEDIR:** The absolute path to the user's default home directory (e.g., `/home/ragno`).
+- **SHELL:** The absolute path to the default command-line interpreter executed upon login (e.g., `/bin/bash`).
+
+**4. Command Reference & Provisioning**
+
+> [!NOTE]
+> **Architectural: Group Inheritance**
+> In Linux, permissions are optimally assigned to **Groups** rather than individual users. Users inherit permissions from their Primary Group and any assigned Secondary Groups. By default, creating a user automatically generates a Primary Group bearing the exact same name.
+
+**Command Convention: Interactive vs. Non-Interactive**
+
+When managing users and groups, Linux distributions typically offer two variants of the creation commands. The position of the word `add` dictates the command's behavior:
+
+- **Prefix (`adduser`, `addgroup`):** High-level, interactive wrapper scripts. They automatically prompt the administrator for passwords, GECOS information, and handle directories seamlessly. **Use case:** Manual, human-driven administration.
+- **Suffix (`useradd`, `groupadd`):** Low-level, non-interactive native binaries. They execute silently and require explicit parameter flags to configure IDs, directories, or passwords. **Use case:** Automated bash scripts, provisioning, and **CI/CD** pipelines.
+
+**User Provisioning & Authentication**
+
+- **`adduser <username>`:** Creates a new user account **(Interactive / Guided)**.
+- **`useradd <username>`:** Creates a new user account **(Non-interactive / Scripting)**.
+- **`passwd <username>`:** Updates or initializes the authentication password for the target user.
+- **`su - <username>`:** Switches the active terminal session to the target user account. Executing `su -` without specifying a username defaults to a Root user login prompt.
+- **`exit`:** Terminates the current active user session and reverts the terminal to the preceding user context.
+- **`deluser <username>`:** Removes the specified user account **(Interactive / High-level)**.
+- **`userdel <username>`:** Removes the specified user account **(Non-interactive / Low-level)**.
+
+**Group Provisioning**
+
+- **`addgroup <groupname>`:** Initializes a new group entity **(Interactive / High-level)**.
+- **`groupadd <groupname>`:** Initializes a new group entity **(Non-interactive / Low-level)**.
+- **`delgroup <groupname>`:** Deletes the specified group entity **(Interactive / High-level)**.
+- **`groupdel <groupname>`:** Deletes the specified group entity **(Non-interactive / Low-level)**.
+
+### Membership & Attribute Modification
+
+- **`usermod -g <group_name> <username>`:** Reassigns the user's **Primary** group ID.
+- **`usermod -G <group1,group2> <username>`:** Assigns the user to a list of **Secondary** groups. *Warning: This operation drops all existing secondary group memberships and strictly overwrites them with the provided list.*
+- **`usermod -aG <group_name> <username>`:** Appends the user to a new **Secondary** group while preserving all existing secondary group memberships.
+- **`groups <username>`:** Outputs the complete list of groups (Primary and Secondary) associated with the target user.
+- **`useradd -g <group_name> <username>`:** Combines user creation and primary group assignment into a single operation, bypassing the default behavior of generating a matching user-group name.
+- **`gpasswd -d <username> <group_name>`:** Revokes the user's membership from the specified secondary group.
+
+---
 
 ### Users & Permissions - Part 2
 
