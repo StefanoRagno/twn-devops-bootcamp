@@ -544,8 +544,53 @@ This creates a sum from 0 to 7 representing every possible combination: **0** (N
 
 ### Basic Linux Commands - Pipes & Redirects (CLI Part 3)
 
-- [ ] Watched video
-- [ ] Demo executed
+- [x] Watched video
+- [x] Demo executed
+
+**PIPING AND REDIRECTION IN LINUX**
+
+**1. CORE CONCEPTS**
+
+Linux commands operate using data streams. The three primary streams are:
+
+- **Standard Input (stdin):** The data passed into a program.
+- **Standard Output (stdout):** The successful result returned by a program.
+- **Standard Error (stderr):** The error message returned when a program fails.
+
+Piping and redirection allow developers to manipulate these streams, chaining commands together to create complex, automated workflows without requiring manual intermediate steps.
+
+**2. PIPING COMMANDS**
+
+Piping uses the pipe character (`|`) to pass the **Standard Output** (**stdout**) of the command on the left directly into the **Standard Input** (**stdin**) of the command on the right. This prevents the first command from printing to the terminal and instead feeds the data directly to the next tool in the chain.
+
+**COMMAND EXAMPLES:**
+
+- **`cat /var/log/syslog | less`:** Reads the entire syslog file and pipes the massive output into the `less` program, allowing the user to read the file interactively page by page instead of flooding the terminal screen.
+- **`history | less`:** Takes the full output of the user's command history and pipes it into the `less` interactive viewer.
+- **`history | grep sudo`:** Pipes the full command history into `grep`, which acts as a filter. It will only output the lines that contain the exact string "sudo".
+- **`history | grep "sudo chmod"`:** Pipes the history into `grep` to find an exact phrase containing spaces. Double quotes are mandatory when searching for multiple words separated by spaces.
+- **`history | grep sudo | less`:** Demonstrates an endless chain of pipes. It takes the history, filters it for "sudo" commands using `grep`, and then pipes that filtered list into `less` for page-by-page viewing.
+- **`ls /usr/bin | grep java`:** Lists all files in the `/usr/bin` directory and pipes the output to `grep` to verify if any file contains the string "java".
+
+**3. REDIRECTING OUTPUT**
+
+Redirection uses the greater-than characters (`>` or `>>`) to funnel the **Standard Output** (**stdout**) of a command directly into a file instead of passing it to another command or printing it to the terminal.
+
+**COMMAND EXAMPLES:**
+
+- **`history | grep sudo > sudo_commands.txt`:** Filters the command history for "sudo" and redirects that output to create a new file named `sudo_commands.txt`. If the file already exists, this single `>` operator will completely overwrite its previous contents.
+- **`cat sudo_commands.txt > sudo_and_remove_commands.txt`:** Reads the contents of one file and completely overwrites (or creates) the target file with that exact data.
+- **`history | grep rm >> sudo_and_remove_commands.txt`:** Filters the command history for "rm" and appends that output to the end of the existing `sudo_and_remove_commands.txt` file. The double `>>` operator ensures the original data is preserved and the new data is added at the bottom.
+
+**4. SEQUENTIAL EXECUTION**
+
+Sequential execution uses the semicolon (`;`) to run multiple, independent commands on a single line. Unlike piping, these commands do not share input or output streams; they simply run one after the other in strict order from left to right.
+
+**COMMAND EXAMPLE:**
+
+- **`clear; sleep 1; echo "Hope you are enjoying the lecture"`:** Executes three distinct commands sequentially: first, it clears the terminal screen; second, it forces the system to wait for exactly 1 second; finally, it prints the designated text string to the terminal.
+
+---
 
 ### Shell Scripting Part 1 - Intro to Shell Scripting
 
