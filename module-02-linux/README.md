@@ -594,8 +594,53 @@ Sequential execution uses the semicolon (`;`) to run multiple, independent comma
 
 ### Shell Scripting Part 1 - Intro to Shell Scripting
 
-- [ ] Watched video
-- [ ] Demo executed
+- [x] Watched video
+- [x] Demo executed
+
+**BASH SCRIPTING BASICS: TECHNICAL REFERENCE**
+
+**1. SHELL AND BASH FUNDAMENTALS**
+
+A shell is a command-line interpreter that acts as the interface between the user and the operating system kernel. It translates human-readable commands into instructions the kernel can execute.
+
+When repetitive administrative tasks (e.g., configuring servers, managing users, bulk file operations) become inefficient to execute one by one on the **command line interface**, these commands can be aggregated into a plain text file. This file is called a shell script, typically denoted by a `.sh` extension.
+
+**Shell Implementations:**
+
+- **Bourne Shell (sh):** The original standard shell for Unix-like systems. Located at `/bin/sh`. It is highly portable but lacks advanced features.
+- **Bourne Again Shell (bash):** An improved, feature-rich superset of the Bourne shell. It is the default shell for most modern Linux distributions. Located at `/bin/bash`.
+
+**2. THE SHEBANG LINE**
+
+Since multiple shell programs can exist on a single system, the operating system requires explicit instruction on which interpreter to use when executing a script. This is handled by the "shebang" line.
+
+The shebang must be the absolute first line of the script. It consists of a sharp (`#`) and a bang (`!`), followed by the absolute path to the intended shell interpreter.
+
+**Shebang Examples:**
+
+- **`#!/bin/bash`:** Declares that the script must be interpreted using the Bash program.
+- **`#!/bin/sh`:** Declares that the script must be interpreted using the standard Bourne shell program.
+
+**3. SCRIPT EXECUTION WORKFLOW**
+
+**Step 1: Create the script**
+
+Create a file with a `.sh` extension (e.g., `setup.sh`) and populate it with commands, ensuring the shebang line is at the top.
+
+**Step 2: Grant Execution Permissions**
+
+By default, newly created files do not possess execution rights. You must explicitly grant the execute permission to the user owner before the operating system will allow the script to run.
+
+- **`chmod u+x setup.sh`:** Adds the execute (`x`) permission specifically to the user owner (`u`) of the `setup.sh` file.
+
+**Step 3: Execute the script**
+
+Once permissions are granted, the script can be executed using either the universal relative path method or the interpreter-specific invocation.
+
+- **`./setup.sh`:** Executes the script using the interpreter declared in the shebang line. The `./` indicates that the file is located in the current directory.
+- **`bash setup.sh`:** Explicitly invokes the `bash` interpreter to run the script. This method bypasses the shebang line and uses `bash` directly.
+
+---
 
 ### Shell Scripting Part 2 - Basic Concepts & Syntax
 
